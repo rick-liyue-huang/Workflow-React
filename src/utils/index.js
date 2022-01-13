@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const isFalsy = (value) => (value === 0 ? false : !value);
 
@@ -18,3 +18,36 @@ export const useMount = (callback) => {
     callback();
   }, []);
 };
+
+export const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+
+  useEffect(() => {
+    // 每次在value变化以后，设置一个定时器
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    // 每次在上一个useEffect处理完成后再执行
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+
+  return debouncedValue;
+};
+
+/*
+
+const debounce = (func, delay) => {
+  let timer;
+  return () => {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      func()
+    }, delay);
+  }
+}
+
+const log = debounce(() => console.log('call'), 5000);
+log()
+log()
+log()
+*/
