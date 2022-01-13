@@ -1,0 +1,57 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "AJ"
+    },
+    {
+      "id": 2,
+      "name": "Claire"
+    },
+    {
+      "id": 3,
+      "name": "Rick"
+    },
+    {
+      "id": 4,
+      "name": "Jing"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Takeaway",
+      "personId": 1,
+      "organization": "Takeaway Group",
+      "created": 1604989757139
+    },
+    {
+      "id": 2,
+      "name": "GroupBuy APP",
+      "personId": 2,
+      "organization": "Groupbuy Group",
+      "created": 1604989757139
+    },
+    {
+      "id": 3,
+      "name": "Material Management",
+      "personId": 2,
+      "organization": "Material Group",
+      "created": 1546300800000
+    },
+    {
+      "id": 4,
+      "name": "General Management",
+      "personId": 3,
+      "organization": "Head Office",
+      "created": 1604980000011
+    },
+    {
+      "id": 5,
+      "name": "Delivery Path Design",
+      "personId": 4,
+      "organization": "Takeaway Group",
+      "created": 1546900800000
+    }
+  ]
+}
