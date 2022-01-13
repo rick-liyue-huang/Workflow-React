@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isNumber } from "util";
 
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
 
@@ -19,7 +20,8 @@ export const useMount = (callback: () => void) => {
   }, []);
 };
 
-export const useDebounce = (value: any, delay?: number) => {
+// generic
+export const useDebounce = <T>(value: T, delay?: number): T => {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
@@ -30,6 +32,21 @@ export const useDebounce = (value: any, delay?: number) => {
   }, [value, delay]);
 
   return debouncedValue;
+};
+
+export const useArray = <T>(initialArray: T[]) => {
+  const [value, setValue] = useState(initialArray);
+  return {
+    value,
+    setValue,
+    add: (item: T) => setValue([...value, item]),
+    clear: () => setValue([]),
+    removeIndex: (index: number) => {
+      const result = [...value];
+      result.splice(index, 1);
+      setValue(result);
+    },
+  };
 };
 
 /*

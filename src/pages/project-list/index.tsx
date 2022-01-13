@@ -33,6 +33,7 @@ const ProjectListPage = () => {
 
   useEffect(() => {
     /*fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.personId}`)*/
+
     fetch(
       `${apiUrl}/projects?${qs.stringify(cleanObject(debouncedParam))}`
     ).then(async (response) => {
