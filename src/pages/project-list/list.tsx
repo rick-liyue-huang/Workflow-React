@@ -1,6 +1,12 @@
 import React from "react";
+import { Project, User } from "./index";
 
-const List = ({ list, users }) => {
+interface ListProps {
+  list: Project[];
+  users: User[];
+}
+
+const List: React.FC<ListProps> = ({ list, users }) => {
   return (
     <table>
       <thead>

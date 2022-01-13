@@ -4,6 +4,22 @@ import SearchPanel from "./search-panel";
 import List from "./list";
 import { cleanObject, useMount, useDebounce } from "../../utils";
 
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  organization: string;
+  token?: string;
+}
+
+export interface Project {
+  id: string;
+  name: string;
+  personId: string;
+  pin: boolean;
+  organization: string;
+}
+
 const apiUrl = process.env.REACT_APP_API_URL;
 
 const ProjectListPage = () => {

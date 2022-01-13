@@ -1,6 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { User } from "./index";
 
-const SearchPanel = ({ param, setParam, users }) => {
+interface SearchPanelProps {
+  param: {
+    name: string;
+    personId: string;
+  };
+  setParam: (param: SearchPanelProps["param"]) => void;
+  users: User[];
+}
+
+const SearchPanel: React.FC<SearchPanelProps> = ({
+  param,
+  setParam,
+  users,
+}) => {
   return (
     <form>
       <div>
