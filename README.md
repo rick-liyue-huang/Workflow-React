@@ -6,7 +6,8 @@ setting are confirmed in 'tsconfig.json' file. In order to compatible with direc
 performance, the whole project will be formatted by prettier, and run `echo {}> .prettierrc.json` to add '.
 prettierrc.json' and also ignore some files including in '.prettierignore'. In order to ensure the whole project
 team keep the same coding styles, I use eslint by `npx mrm@2 lint-staged` and install 'eslint-config-prettier' to
-make ESLint and Prettier play nice with each other by coding `"extends": [ "react-app", "react-app/jest", "prettier" ]`. One more thing is about the commit comments in professional form, so I will use 'commitlint' by coding `yarn add @commitlint/config-conventional @commitlint/cli -D` and `echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js`, and `npx husky add .husky/commit-msg "yarn commitlint --edit $1"`. After the upon whole thing, the project coding will be under the rules of 'prettier' and the submitted
+make ESLint and Prettier play nice with each other by coding `"extends": [ "react-app", "react-app/jest", "prettier" ]`.
+One more thing is about the commit comments in professional form, so I will use 'commitlint' by coding `yarn add @commitlint/config-conventional @commitlint/cli -D` and `echo "module.exports = {extends: ['@commitlint/config-conventional']}" > commitlint.config.js`, and `npx husky add .husky/commit-msg "yarn commitlint --edit $1"`. After the upon whole thing, the project coding will be under the rules of 'prettier' and the submitted
 codes come with professional comments format.
 
 2.Building the backend environment for development envieronment
@@ -67,4 +68,3 @@ return (
 </QueryClientProvider>
 );
 };
-
