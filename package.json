@@ -10,6 +10,7 @@
     "@types/node": "^16.11.19",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "localstorage-console-tool": "github:rick-liyue-huang/localstorage-console-tool",
     "qs": "^6.10.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -23,7 +24,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install",
-    "json-server": "json-server -p 3500 -w mock_json_server/db.json"
+    "json-server": "json-server ./mock_json_server/db.json --watch --port 3001 --middlewares mock_json_server/middleware.js"
   },
   "eslintConfig": {
     "extends": [
