@@ -1,6 +1,7 @@
 import React, { FormEvent } from "react";
 import { Form, Input, Button } from "antd";
 import { useAuth } from "../context/auth-context";
+import { LongButton } from "./index";
 
 const LoginPage = () => {
   const { login, user } = useAuth();
@@ -24,9 +25,9 @@ const LoginPage = () => {
         <Input type="password" id="password" placeholder={"password"} />
       </Form.Item>
       <Form.Item>
-        <Button htmlType={"submit"} type={"primary"}>
+        <LongButton htmlType={"submit"} type={"primary"}>
           Login
-        </Button>
+        </LongButton>
       </Form.Item>
     </Form>
   );
