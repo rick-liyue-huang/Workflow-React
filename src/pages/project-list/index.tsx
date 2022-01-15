@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import * as qs from "qs";
+import styled from "@emotion/styled";
 import SearchPanel from "./search-panel";
 import List from "./list";
 import { cleanObject, useMount, useDebounce } from "../../utils";
@@ -19,6 +20,7 @@ export interface Project {
   personId: string;
   pin: boolean;
   organization: string;
+  created: number;
 }
 
 export const apiUrl = process.env.REACT_APP_API_URL;
@@ -45,6 +47,7 @@ const ProjectListPage = () => {
     });
     */
     client("projects", { data: cleanObject(debouncedParam) }).then(setList);
+    //  eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedParam]);
 
   useMount(() => {
@@ -59,11 +62,16 @@ const ProjectListPage = () => {
   });
 
   return (
-    <div>
+    <Container>
+      <h1>Project List</h1>
       <SearchPanel param={param} setParam={setParam} users={users} />
       <List list={list} users={users} />
-    </div>
+    </Container>
   );
 };
+
+const Container = styled.div`
+  padding: 3.2rem;
+`;
 
 export default ProjectListPage;

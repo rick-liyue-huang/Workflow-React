@@ -1,30 +1,45 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { Button } from "antd";
+import { Button, Dropdown, Menu } from "antd";
 import ProjectListPage from "./pages/project-list";
 import { useAuth } from "./context/auth-context";
 import { Row } from "./components/libs";
+import Logo from "./assets/logo.jpeg";
 
 export const AuthenticatedApp = () => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   return (
     <Container>
       <Header>
         <HeaderLeft gap={true}>
-          <h3>Logo</h3>
+          <img src={Logo} alt="" width="70" />
           <h3>Project</h3>
           <h3>User</h3>
         </HeaderLeft>
         <HeaderRight>
-          <Button onClick={logout}>Logout</Button>
+          <Dropdown
+            overlay={
+              <Menu>
+                <Menu.Item key={"logout"}>
+                  <Button type={"link"} onClick={logout}>
+                    Logout
+                  </Button>
+                </Menu.Item>
+              </Menu>
+            }
+          >
+            <Button type={"link"} onClick={(evt) => evt.preventDefault()}>
+              Hi, {user?.name}
+            </Button>
+          </Dropdown>
         </HeaderRight>
       </Header>
-      <Nav>nav</Nav>
+      <Nav />
       <Main>
         <ProjectListPage />
       </Main>
-      <Aside>aside</Aside>
-      <Footer>footer</Footer>
+      <Aside />
+      <Footer />
     </Container>
   );
 };
@@ -48,6 +63,9 @@ const Header = styled.header`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding: 3.2rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+  z-index: 10;
 `;
 
 const HeaderLeft = styled(Row)``;

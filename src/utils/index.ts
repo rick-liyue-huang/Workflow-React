@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { isNumber } from "util";
 
 export const isFalsy = (value: unknown) => (value === 0 ? false : !value);
+export const isVoid = (value: unknown) =>
+  value === undefined || value === null || value === "";
 
 export const cleanObject = (object: Record<string, any>) => {
   const result = { ...object };
   Object.keys(result).forEach((key) => {
     const value = result[key];
-    if (isFalsy(value)) {
+    if (isVoid(value)) {
       delete result[key];
     }
   });
@@ -17,6 +18,8 @@ export const cleanObject = (object: Record<string, any>) => {
 export const useMount = (callback: () => void) => {
   useEffect(() => {
     callback();
+    //  TODO
+    //  eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 };
 

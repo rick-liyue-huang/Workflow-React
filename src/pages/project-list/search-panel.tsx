@@ -17,7 +17,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
   users,
 }) => {
   return (
-    <Form>
+    <Form style={{ marginBottom: "2rem" }} layout={"inline"}>
       <Form.Item>
         <Input
           type="text"
@@ -29,6 +29,8 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
             })
           }
         />
+      </Form.Item>
+      <Form.Item>
         <Select
           value={param.personId}
           onChange={(value) =>
