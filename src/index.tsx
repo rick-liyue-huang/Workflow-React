@@ -5,6 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { loadServer, DevTools } from "localstorage-console-tool";
 import { AppProvider } from "./context";
+// import antd.less after 'localstorage-console-tool, and use .less to custom the antd theme
+import "antd/dist/antd.less";
 
 loadServer(() =>
   ReactDOM.render(

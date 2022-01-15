@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Form, Select, Input, Button } from "antd";
 import { User } from "./index";
 
 interface SearchPanelProps {
@@ -16,6 +17,39 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
   users,
 }) => {
   return (
+    <Form>
+      <Form.Item>
+        <Input
+          type="text"
+          value={param.name}
+          onChange={(e) =>
+            setParam({
+              ...param,
+              name: e.target.value,
+            })
+          }
+        />
+        <Select
+          value={param.personId}
+          onChange={(value) =>
+            setParam({
+              ...param,
+              personId: value,
+            })
+          }
+        >
+          <Select.Option value="">Person In Charge</Select.Option>
+          {users.map((user) => (
+            <Select.Option key={user.id} value={user.id}>
+              {user.name}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+    </Form>
+  );
+
+  /*return (
     <form>
       <div>
         <input
@@ -46,7 +80,7 @@ const SearchPanel: React.FC<SearchPanelProps> = ({
         </select>
       </div>
     </form>
-  );
+  );*/
 };
 
 export default SearchPanel;

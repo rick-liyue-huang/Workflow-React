@@ -41,7 +41,7 @@ just the page will change with additional 'dev console table'.
 In order to let website know who logins, we should set the window.localStorage as 'user.token' and should bring it with login and register, and I realize it in 'src/auth-providers.ts', which is the base of project context created in 'src/context' directory, finally I create the 'AuthContext' and wraps the whole components in 'src/index.tsx'. The created 'authenticated-app.tsx' will point to 'projectList' directory and the 'unauthenticated-app' directory will include the 'login' and 'register' files.
 
 5.Using Ant design to beautify the project
-Here I will use ant design, emotion.sh and craco to beautify the whole project, and also need modify the 'package. json', add add craco configuration file by 'craco.config.js', in which I can set the project global style.
+Here I will use ant design, emotion.sh and craco to beautify the whole project, add 'craco.config.js' and also need modify the 'package. json', add add craco configuration file by 'craco.config.js', in which I can set the project global style.
 "scripts": {
 "start": "craco start",
 "build": "craco build",
