@@ -28,7 +28,13 @@ export const UnauthenticatedApp = () => {
           <LoginPage onError={setError} />
         )}
         <Divider />
-        <Button type={"link"} onClick={() => setIsRegister(!isRegister)}>
+        <Button
+          type={"link"}
+          onClick={() => {
+            setIsRegister(!isRegister);
+            setError(null);
+          }}
+        >
           Switch to {isRegister ? "Login" : "Register"}
         </Button>
       </StyledCard>

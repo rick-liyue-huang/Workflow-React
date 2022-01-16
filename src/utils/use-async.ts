@@ -45,15 +45,19 @@ export const useAsync = <T>(initialState?: State<T>) => {
     // before transfer data
     setState({ ...state, stat: "loading" });
     // transfer data or get error
-    return promise
-      .then((data) => {
-        setData(data);
-        return data;
-      })
-      .catch((err) => {
-        setError(err);
-        return err;
-      });
+    return (
+      promise
+        .then((data) => {
+          setData(data);
+          return data;
+        })
+        // catch can absorb the exception
+        .catch((err) => {
+          setError(err);
+          // return err;
+          return Promise.reject(err);
+        })
+    );
   };
 
   // output the information

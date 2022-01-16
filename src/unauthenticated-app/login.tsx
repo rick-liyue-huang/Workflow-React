@@ -2,16 +2,21 @@ import React, { FormEvent } from "react";
 import { Form, Input, Button } from "antd";
 import { useAuth } from "../context/auth-context";
 import { LongButton } from "./index";
+import { useAsync } from "../utils/use-async";
+import { log } from "util";
 
 const LoginPage = ({ onError }: { onError: (error: Error) => void }) => {
   const { login, user } = useAuth();
+
+  const { run, isLoading } = useAsync();
 
   const handleSubmit = async (value: {
     username: string;
     password: string;
   }) => {
     try {
-      await login(value);
+      // await login(value);
+      await run(login(value));
     } catch (err) {
       onError(err as Error);
     }
@@ -32,7 +37,7 @@ const LoginPage = ({ onError }: { onError: (error: Error) => void }) => {
         <Input type="password" id="password" placeholder={"password"} />
       </Form.Item>
       <Form.Item>
-        <LongButton htmlType={"submit"} type={"primary"}>
+        <LongButton loading={isLoading} htmlType={"submit"} type={"primary"}>
           Login
         </LongButton>
       </Form.Item>
