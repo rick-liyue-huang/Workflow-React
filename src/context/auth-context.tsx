@@ -4,6 +4,8 @@ import { User } from "../pages/project-list";
 import { getToken } from "../auth-providers";
 import { http } from "../utils/http";
 import { useMount } from "../utils";
+import { useAsync } from "../utils/use-async";
+import { FullPageError, FullPageLoading } from "../components/libs";
 
 interface AuthForm {
   username: string;
@@ -34,7 +36,18 @@ const AuthContext = React.createContext<
 AuthContext.displayName = "AuthContext";
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [user, setUser] = useState<User | null>(null);
+  // const [user, setUser] = useState<User | null>(null);
+
+  // when refresh the project list, it will use useAsync to get the loading state
+  const {
+    data: user,
+    error,
+    isLoading,
+    isIdle,
+    isError,
+    run,
+    setData: setUser,
+  } = useAsync<User | null>();
 
   const login = (form: AuthForm) =>
     auth.login(form).then((user) => setUser(user));
@@ -42,8 +55,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => auth.logout().then(() => setUser(null));
 
   useMount(() => {
-    refreshUser().then(setUser);
+    // refreshUser().then(setUser);
+    run(refreshUser());
   });
+
+  if (isIdle || isLoading) {
+    return <FullPageLoading />;
+  }
+
+  if (isError) {
+    return <FullPageError error={error} />;
+  }
+
   return (
     <AuthContext.Provider
       children={children}
