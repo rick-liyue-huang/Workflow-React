@@ -1,14 +1,15 @@
 import React from "react";
 import dayjs from "dayjs";
-import { Table } from "antd";
+import { Table, TableProps } from "antd";
 import { Project, User } from "./index";
 
-interface ListProps {
-  list: Project[];
+// here it includes the list property
+interface ListProps extends TableProps<Project> {
+  // list: Project[];
   users: User[];
 }
 
-const List: React.FC<ListProps> = ({ list, users }) => {
+const List: React.FC<ListProps> = ({ users, ...props }) => {
   return (
     <Table
       pagination={false}
@@ -47,7 +48,8 @@ const List: React.FC<ListProps> = ({ list, users }) => {
           },
         },
       ]}
-      dataSource={list}
+      // dataSource={list}
+      {...props}
     />
   );
 

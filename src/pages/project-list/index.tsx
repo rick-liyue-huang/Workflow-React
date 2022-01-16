@@ -5,6 +5,7 @@ import SearchPanel from "./search-panel";
 import List from "./list";
 import { cleanObject, useMount, useDebounce } from "../../utils";
 import { useHttp } from "../../utils/http";
+import { Typography } from "antd";
 
 export interface User {
   id: string;
@@ -35,6 +36,10 @@ const ProjectListPage = () => {
   const debouncedParam = useDebounce(param, 2000);
   const client = useHttp();
 
+  // deal with the loading and error status on page showing
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<Error | null>(null);
+
   useEffect(() => {
     /*fetch(`${apiUrl}/projects?name=${param.name}&personId=${param.personId}`)*/
     /*
@@ -46,7 +51,17 @@ const ProjectListPage = () => {
       }
     });
     */
-    client("projects", { data: cleanObject(debouncedParam) }).then(setList);
+
+    // before the page show the data
+    setIsLoading(true);
+
+    client("projects", { data: cleanObject(debouncedParam) })
+      .then(setList)
+      .catch((err) => {
+        setError(err);
+        setList([]);
+      })
+      .finally(() => setIsLoading(false));
     //  eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedParam]);
 
@@ -65,7 +80,11 @@ const ProjectListPage = () => {
     <Container>
       <h1>Project List</h1>
       <SearchPanel param={param} setParam={setParam} users={users} />
-      <List list={list} users={users} />
+      {error ? (
+        <Typography.Text type={"danger"}>{error.message}</Typography.Text>
+      ) : null}
+      {/*<List list={list} users={users} />*/}
+      <List loading={isLoading} dataSource={list} users={users} />
     </Container>
   );
 };
