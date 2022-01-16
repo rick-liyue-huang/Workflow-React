@@ -8,6 +8,7 @@ import Logo from "./assets/logo.jpeg";
 
 export const AuthenticatedApp = () => {
   const { logout, user } = useAuth();
+
   return (
     <Container>
       <Header>
