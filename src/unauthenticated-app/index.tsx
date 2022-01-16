@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Card, Divider } from "antd";
+import { Button, Card, Divider, Typography } from "antd";
 import styled from "@emotion/styled";
 import RegisterPage from "./register";
 import LoginPage from "./login";
@@ -11,12 +11,22 @@ export const UnauthenticatedApp = () => {
   // default as login status
   const [isRegister, setIsRegister] = useState(false);
 
+  // config the error state on login
+  const [error, setError] = useState<Error | null>(null);
+
   return (
     <Container>
       <Background />
       <StyledCard>
         <Title>{isRegister ? "Please Register" : "Please Login"}</Title>
-        {isRegister ? <RegisterPage /> : <LoginPage />}
+        {error ? (
+          <Typography.Text type={"danger"}>{error.message}</Typography.Text>
+        ) : null}
+        {isRegister ? (
+          <RegisterPage onError={setError} />
+        ) : (
+          <LoginPage onError={setError} />
+        )}
         <Divider />
         <Button type={"link"} onClick={() => setIsRegister(!isRegister)}>
           Switch to {isRegister ? "Login" : "Register"}

@@ -3,11 +3,18 @@ import { Form, Input, Button } from "antd";
 import { useAuth } from "../context/auth-context";
 import { LongButton } from "./index";
 
-const LoginPage = () => {
+const LoginPage = ({ onError }: { onError: (error: Error) => void }) => {
   const { login, user } = useAuth();
 
-  const handleSubmit = (value: { username: string; password: string }) => {
-    login(value);
+  const handleSubmit = async (value: {
+    username: string;
+    password: string;
+  }) => {
+    try {
+      await login(value);
+    } catch (err) {
+      onError(err as Error);
+    }
   };
 
   return (
